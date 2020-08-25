@@ -53,14 +53,13 @@ class PostController extends Controller
         $post = Post::find($post_id);
 
         $myPosts = Post::where('user_id', '=', Auth::id());
+        $myPostsCount = $myPosts->count();
 
         $postsToRemove = $myPosts->where('order', '>', $post->order)->get();
 
-        if ($post->order != $myPosts->count() && $postsToRemove->count() != 1) {
-            dd("OLA");
-            foreach ($myPosts as $p) {
+        if ($post->order != $myPostsCount && $postsToRemove->count() != 0) {
+            foreach ($postsToRemove as $p) {
                 $p->order--;
-                dd($p);
                 $p->save();
             }
         }
