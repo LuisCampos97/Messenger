@@ -16,3 +16,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'PostController@listPosts')->name('home');
+
+Route::get('/changePassword', 'Auth\ChangePassword@index')->name('changePassword');
+Route::post('/changePassword', 'Auth\ChangePassword@changePassword')->name('changePassword');
+
+Route::post('/createPost', 'PostController@createPost')->name('createPost');
+Route::delete('/post/{post_id}', 'PostController@deletePost')->name('deletePost');
+Route::patch('/post/{post_id}/moveUpOrder', 'PostController@moveUpOrder')->name('moveUpOrder');
+Route::patch('/post/{post_id}/moveDownOrder', 'PostController@moveDownOrder')->name('moveUpOrder');
+
+
