@@ -41,4 +41,10 @@ class PostController extends Controller
 
         return redirect()->route('home');
     }
+
+    public function reorderPost($post_id)
+    {
+        dd($post_id);
+
+    }
 }

@@ -26,4 +26,5 @@ Route::post('/changePassword', 'Auth\ChangePassword@changePassword')->name('chan
 
 Route::post('/createPost', 'PostController@createPost')->name('createPost');
 Route::delete('/post/{post_id}', 'PostController@deletePost')->name('deletePost');
+Route::put('/post/{post_id}/reorder', 'PostController@reorderPost')->name('reorderPost');
 
