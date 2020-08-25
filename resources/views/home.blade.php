@@ -26,14 +26,18 @@
 
                     <form method="POST" action="{{ route('createPost') }}">
                         @csrf
-
                         <div class="form-group">
                             <textarea class="form-control" name="body" id="new-post" rows="4" placeholder="Create your post"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary float-right">Create Post</button>
                     </form>
                     <br>
+
                     <h3>Posts</h3>
+                    @if ($postsCount == 0)
+                        <h5 class="container">There are no posts...</h5>
+                    @endif
+                    
                     @foreach ($posts as $post)
                         <div class="container">
                             @if (Auth::id() == $post->user_id)

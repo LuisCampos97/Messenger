@@ -27,17 +27,17 @@ class ChangePassword extends Controller
             return back()->with('error', 'Your current password is wrong!');
         }
 
-        if(strcmp($request->current_password, $request->new_password) == 0) {
+        if (strcmp($request->current_password, $request->new_password) == 0) {
             return back()->with('error', 'The current password and the new password are the same!');
         }
 
-        if(!strcmp($request->new_password, $request->new_password_confirmation) == 0) {
+        if (!strcmp($request->new_password, $request->new_password_confirmation) == 0) {
             return back()->with('error', 'The new password and the new password confirmation dont are the same!');
         }
 
         $request->validate([
             'current_password' => 'required',
-            'new_password' => 'required'
+            'new_password' => 'required',
         ]);
 
         $user->password = bcrypt($request->new_password);
