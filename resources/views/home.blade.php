@@ -32,6 +32,15 @@
                         </div>
                         <button type="submit" class="btn btn-primary">Create Post</button>
                     </form>
+                    <br>
+                    <h3>Posts</h3>
+                    @foreach ($posts as $post)
+                        <div class="container">
+                            <div class="font-weight-bold">{{$post->name}}</div>
+                            <div style="padding-left:2em">{{$post->body}}</div>
+                            <div style ="margin-bottom:1em" class="font-weight-light font-italic">{{$post->created_at}}</div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
