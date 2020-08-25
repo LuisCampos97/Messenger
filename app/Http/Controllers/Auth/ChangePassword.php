@@ -24,21 +24,25 @@ class ChangePassword extends Controller
         $user = Auth::user();
 
         if (!(Hash::check($request->current_password, $user->password))) {
-            //* Wrong current password
-            return back()->width('error', 'Your current password is wrong!');
+            return back()->with('error', 'Your current password is wrong!');
         }
 
         if(strcmp($request->current_password, $request->new_password) == 0) {
-            //* Passwords iguais
-            return back()->width('error', 'The current password and the new password are the same!');
+            return back()->with('error', 'The current password and the new password are the same!');
+        }
+
+        if(!strcmp($request->new_password, $request->new_password_confirmation) == 0) {
+            return back()->with('error', 'The new password and the new password confirmation dont are the same!');
         }
 
         $request->validate([
             'current_password' => 'required',
-            'new_password' => 'required|confirmed'
+            'new_password' => 'required'
         ]);
 
-        $user->password = bycrypt($request->new_password);
+        $user->password = bcrypt($request->new_password);
         $user->save();
+
+        return back()->with('success', 'Password changed');
     }
 }
