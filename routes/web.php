@@ -16,3 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/changePassword', 'Auth\ChangePassword@index')->name('changePassword');
+Route::post('/changePassword', 'Auth\ChangePassword@changePassword')->name('changePassword');
+
