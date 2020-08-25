@@ -23,7 +23,7 @@ class PostController extends Controller
         return redirect()->route('home')->with('success', 'Post successfully created!');
     }
 
-    public function posts()
+    public function listPosts()
     {
         $posts = DB::table('posts')
             ->join('users', 'posts.user_id', '=', 'users.id')
@@ -31,12 +31,14 @@ class PostController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        //$posts = Post::orderBy('created_at', 'desc')->get();
         return view('home', ['posts' => $posts]);
     }
 
-    public function getUser($user_id)
+    public function deletePost($post_id)
     {
-        return User::find($user_id);
+        $post = Post::find($post_id);
+        $post->delete();
+
+        return redirect()->route('home');
     }
 }
