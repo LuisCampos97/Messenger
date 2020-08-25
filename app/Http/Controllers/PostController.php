@@ -39,8 +39,8 @@ class PostController extends Controller
         $posts = DB::table('posts')
             ->join('users', 'posts.user_id', '=', 'users.id')
             ->select('posts.*', 'users.name')
-        //->orderBy('created_at', 'desc')
             ->orderBy('order', 'desc')
+            ->orderBy('created_at', 'desc')
             ->get();
 
         $postsCount = Post::where('user_id', '=', Auth::id())->count();
