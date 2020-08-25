@@ -39,10 +39,12 @@
                             <div class="font-weight-bold">{{$post->name}}</div>
                             <div style="padding-left:2em">{{$post->body}}</div>
                             <div class="font-weight-light font-italic">{{$post->created_at}}</div>
-                            <form action="{{ action('PostController@deletePost', $post->id) }}" method="POST" class="inline">
-                                @csrf @method('delete')
-                                <button type="submit" class="btn btn-danger btn-sm" style ="margin-bottom:1em">Remove Post</button>
-                            </form>
+                            @if (Auth::id() == $post->user_id)
+                                <form action="{{ action('PostController@deletePost', $post->id) }}" method="POST" class="inline">
+                                    @csrf @method('delete')
+                                    <button type="submit" class="btn btn-danger btn-sm" style ="margin-bottom:1em">Remove Post</button>
+                                </form>
+                            @endif
                         </div>
                     @endforeach
                 </div>
