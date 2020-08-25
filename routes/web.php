@@ -19,10 +19,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'PostController@posts')->name('home');
+Route::get('/home', 'PostController@listPosts')->name('home');
 
 Route::get('/changePassword', 'Auth\ChangePassword@index')->name('changePassword');
 Route::post('/changePassword', 'Auth\ChangePassword@changePassword')->name('changePassword');
 
 Route::post('/createPost', 'PostController@createPost')->name('createPost');
+Route::delete('/post/{post_id}', 'PostController@deletePost')->name('deletePost');
 
